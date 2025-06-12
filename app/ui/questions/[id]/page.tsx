@@ -4,13 +4,13 @@ import { Answer } from "@/components/Answer";
 import { SubmitAnswer } from "@/components/SubmitAnswer";
 
 export default async function Page({ params }: { params: { id: string } }) {
-    const { id } = params;
+    const { id } = await params;
     const questions = await fetchQuestion(id);
-    const question = questions[0];
-    const title = question ? question.title : 'Question not found';
+    console.log("Fetched question:", questions);
+    const title = questions ? questions.title : 'Question not found';
 
     const answer = await fetchAnswers(id);
-    const markedAnswerId = question?.answer_id;
+    const markedAnswerId = questions?.answer_id;
 
     const sortedAnswers = [...answer].sort((a, b) => {
         if (a.id === markedAnswerId) return -1;
