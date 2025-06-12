@@ -3,7 +3,7 @@ import { fetchQuestion, fetchAnswers } from "@/lib/data";
 import { Answer } from "@/components/Answer";
 import { SubmitAnswer } from "@/components/SubmitAnswer";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const questions = await fetchQuestion(id);
     {/* console.log("Fetched question:", questions); */} // Debugging help to find out why I wasn't getting a title.
