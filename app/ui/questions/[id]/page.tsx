@@ -6,7 +6,7 @@ import { SubmitAnswer } from "@/components/SubmitAnswer";
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = await params;
     const questions = await fetchQuestion(id);
-    console.log("Fetched question:", questions);
+    {/* console.log("Fetched question:", questions); */} // Debugging help to find out why I wasn't getting a title.
     const title = questions ? questions.title : 'Question not found';
 
     const answer = await fetchAnswers(id);
