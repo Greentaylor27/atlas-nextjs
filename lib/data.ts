@@ -97,3 +97,28 @@ export async function fetchAnswers(questionId: string) {
     throw new Error("Error fetching answer");
   }
 }
+
+export async function insertAnswer(questionId: string, answer: string) {
+  try {
+    await sql`
+    INSERT INTO answers (answer, question_id)
+    VALUES (${answer}, ${questionId});
+    `;
+  } catch (err) {
+    console.error("Error inserting answer into Database:", err);
+    throw new Error("Failed to insert question Try again");
+  }
+}
+
+export async function answerMarkedAsAccepted(questionId: string, answerId: string) {
+  try {
+    await sql`
+    UPDATE questions
+    SET answer_id = ${answerId}
+    WHERE id = ${questionId};
+    `;
+  } catch (err) {
+    console.error("Failed Accepting Answer:", err);
+    throw new Error("Failed to Accept Answer.");
+  }
+}
